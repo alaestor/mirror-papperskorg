@@ -1,0 +1,54 @@
+Items.PrecursorSandevistan:
+  $base: Items.AdvancedSandevistanApogeePlusPlus
+  #icon: UIIcon.ItemIcon
+  #iconPath: cw_system_sandevistanedgerunner
+  friendlyName: ''
+  displayName: LocKey#PrecursorSandevistan_name
+  localizedDescription: LocKey#PrecursorSandevistan_desc
+  OnLooted: [] # override Apogee looted flag
+  OnEquip:
+    - $type: gamedataGameplayLogicPackage_Record # sande flavor text
+      UIData:
+        $type: gamedataGameplayLogicPackageUIData_Record
+        localizedDescription: LocKey#PrecursorSandevistan_flavor
+    - $base: Items.AdvancedSandevistanApogeePlusPlus_inline0 # sande slow
+      UIData:
+        $base: Items.AdvancedSandevistanApogeePlusPlus_inline1
+        localizedDescription: LocKey#PrecursorSandevistan_ability
+        floatValues:
+          - 99.999
+    - $type: gamedataGameplayLogicPackage_Record # sande cooldown
+      UIData:
+        $type: gamedataGameplayLogicPackageUIData_Record
+        localizedDescription: LocKey#PrecursorSandevistan_cooldown
+  tags:
+    - Cyberware
+    - HideInBackpackUI
+    - Sandevistan
+    - Iconic_OS_CW
+  variants:
+    #- Variants.Humanity60Cost
+    - Variants.Humanity0Cost
+  statModifiers:
+    - Items.AdvancedSandevistanApogeePlusPlus_inline18 # Iconic
+    - Items.AdvancedSandevistanApogeePlusPlus_inline19 # Sande
+    - $type: gamedataConstantStatModifier_Record # Duration
+      value: 60
+      modifierType: Additive
+      statType: BaseStats.TimeDilationSandevistanDuration
+    - $type: gamedataConstantStatModifier_Record # Time Scale
+      value: 0.001
+      modifierType: Additive
+      statType: BaseStats.TimeDilationSandevistanTimeScale
+    - $type: gamedataConstantStatModifier_Record # Recharge Duration
+      value: 1
+      modifierType: Additive
+      statType: BaseStats.TimeDilationSandevistanRechargeDuration
+    - $type: gamedataConstantStatModifier_Record # Cooldown Base
+      value: 0.01
+      modifierType: Additive
+      statType: BaseStats.TimeDilationSandevistanCooldownBase
+    - $type: gamedataConstantStatModifier_Record # Enter Cost
+      value: 0
+      modifierType: Additive
+      statType: BaseStats.TimeDilationSandevistanEnterCost

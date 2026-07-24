@@ -1,0 +1,118 @@
+{
+  "Header": {
+    "WolvenKitVersion": "8.11.0",
+    "WKitJsonVersion": "0.0.8",
+    "GameVersion": 2000,
+    "ExportedDateTime": "2023-10-16T03:35:59.1680736Z",
+    "DataType": "CR2W",
+    "ArchiveFileName": "L:\\_misc\\cyberpunk2077\\_editors\\WolvenKit\\_Projects\\precursor_cw\\source\\archive\\precursor_cw\\ops\\translation_strings.json"
+  },
+  "Data": {
+    "Version": 195,
+    "BuildVersion": 0,
+    "RootChunk": {
+      "$type": "JsonResource",
+      "cookingPlatform": "PLATFORM_PC",
+      "root": {
+        "HandleId": "0",
+        "Data": {
+          "$type": "localizationPersistenceOnScreenEntries",
+          "entries": [
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "\u003CRich color=\u0022TooltipText.cyberwareDescriptionHighlightColor\u0022 style=\u0022Semi-Bold\u0022\u003EPRECURSOR ARTIFACT\u003C/\u003E\\n\u0022Yielding Universe - Neural Overdrive\u0022",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorSandevistan_flavor"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "Precursor \u0022YU-NO\u0022 Sandevistan",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorSandevistan_name"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "The primogenitor of humanity\u0027s Sandevistan technology. Its very existence is forbidden knowledge. Hypothesized to be an artifact from a precursor civilization, this device was discovered during excavation for a lunar base. Despite exhaustive reverse-engineering efforts, the capabilities of the YU-NO sandevistan far exceed those of our \u0027cheap\u0027 imitations. Not only does it overdrive neurological functions, but it also partly shifts the mass of the user into another space-time (in a manor described by the Yielding Universe theory), resulting in relativistic time-dilation.",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorSandevistan_desc"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "Press \u003CInput context=\u0022Abilities\u0022 actionName=\u0022IconicCyberware\u0022 color=\u0022MainColors.Blue\u0022 hold=\u0022Hide\u0022\u003E\u003C/\u003E to \u003CRich color=\u0022TooltipText.cyberwareDescriptionHighlightColor\u0022 style=\u0022Semi-Bold\u0022\u003Eactivate\u003C/\u003E and \u003CRich color=\u0022TooltipText.cyberwareDescriptionHighlightColor\u0022 style=\u0022Semi-Bold\u0022\u003Edeactivate\u003C/\u003E. It can be activated \u003CRich color=\u0022TooltipText.cyberwareDescriptionHighlightColor\u0022 style=\u0022Semi-Bold\u0022\u003Eat will\u003C/\u003E.\\n\\nWhen active:\\n\u003CRich color=\u0022TooltipText.cyberwareDescriptionHighlightColor\u0022 style=\u0022Semi-Bold\u0022\u003ESlows time by {float_0}%\u003C/\u003E\\n(you are not slowed)",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorSandevistan_ability"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "\u003CRich color=\u0022TooltipText.cyberwareDescriptionHighlightColor\u0022 style=\u0022Semi-Bold\u0022\u003ECooldown:\u003C/\u003E instantaneous.",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorSandevistan_cooldown"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "\u003CRich color=\u0022TooltipText.cyberwareDescriptionHighlightColor\u0022 style=\u0022Semi-Bold\u0022\u003EPRECURSOR ARTIFACT\u003C/\u003E\\n\u0022Linear Associative Inference Network\u0022",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorCyberdeck_flavor"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "Precursor \u0022LAIN\u0022 Terminal",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorCyberdeck_name"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "The primogenitor of humanity\u0027s Cyberdeck technology. Its very existence is forbidden knowledge. Hypothesized to be an artifact from a precursor civilization, this device was discovered during excavation for a lunar base. Despite exhaustive reverse-engineering efforts, the capabilities of the LAIN terminal far exceed those of our \u0027cheap\u0027 imitations. The terminal accesses a network of quantum neural processors that exist outside of our space-time, which perform linear associative inference on unfathomable quantities of data to perform (seemingly) any computational operation in constant time. Whether this network is a mere machine or the mind of an extra-dimensional super-intelligence is unknown.",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorCyberdeck_desc"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "Instantaneous cyberdeck RAM recovery.",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorCyberdeck_regen"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "Enhances cyber-offense capabilities.",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorCyberdeck_qhoffense"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "Enhances cyber-defense capabilities.",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorCyberdeck_qhdefense"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "Enhances memory efficiency.",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorCyberdeck_qhefficiency"
+            },
+            {
+              "$type": "localizationPersistenceOnScreenEntry",
+              "femaleVariant": "Advanced built-in quickhacks.",
+              "maleVariant": "",
+              "primaryKey": "0",
+              "secondaryKey": "PrecursorCyberdeck_bultins"
+            }
+          ]
+        }
+      }
+    },
+    "EmbeddedFiles": []
+  }
+}

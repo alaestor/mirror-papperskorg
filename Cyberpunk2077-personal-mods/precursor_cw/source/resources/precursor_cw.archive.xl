@@ -1,0 +1,4 @@
+localization:
+  onscreens:
+    en-us:
+       - precursor_cw\ops\translation_strings.json

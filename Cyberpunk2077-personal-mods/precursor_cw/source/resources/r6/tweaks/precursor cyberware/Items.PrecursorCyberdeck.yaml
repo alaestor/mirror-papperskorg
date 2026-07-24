@@ -1,0 +1,148 @@
+Items.PrecursorCyberdeck:
+  $base: Items.AdvancedNetwatchNetdriverMKLegendaryPlusPlus
+  #icon: UIIcon.ItemIcon
+  #iconPath: cw_cyberdeck_netwatch_netdriver
+  friendlyName: ''
+  displayName: LocKey#PrecursorCyberdeck_name
+  localizedDescription: LocKey#PrecursorCyberdeck_desc
+  OnEquip:
+    - $type: gamedataGameplayLogicPackage_Record # cyberdeck flavor text
+      UIData:
+        $type: gamedataGameplayLogicPackageUIData_Record
+        localizedDescription: LocKey#PrecursorCyberdeck_flavor
+    - Items.BaseDeck_inline0 # has cyberdeck
+    - Items.BaseDeck_inline3
+    - $base: Items.AdvancedNetwatchNetdriverMKLegendaryPlusPlus_inline1
+      stats:
+        - $base: Items.AdvancedNetwatchNetdriverMKLegendaryPlusPlus_inline2
+          value: 30.0 # ram
+        - $base: Items.AdvancedNetwatchNetdriverMKLegendaryPlusPlus_inline3
+          value: 10.0 # buffer
+    - $base: Items.PingRefreshingAbility01
+    - $base: Items.MemoryRegenAbility03 # instant (ish) ram regen
+      stats:
+        - $base: Items.MemoryRegenAbility03_inline0
+          value: 1073741 # int32 max / 2
+      UIData:
+        $type: gamedataGameplayLogicPackageUIData_Record
+        localizedDescription: LocKey#PrecursorCyberdeck_regen
+    - $type: gamedataGameplayLogicPackage_Record # quickhack offense
+      stats:
+        - $base: Items.QuickHackDamageAbility03_inline0
+          value: 100.00 # 100x dmg
+        - $base: Items.QuickHackDurationAbility03_inline0
+          value: 10.00 # 10x duration
+        - $base: Items.SpreadingRangeAbility03_inline0 # 3x spread range
+          value: 3.0
+        - $base: Items.UltimateHacksSpreadAbility01_inline0 # ult hack spread
+          value: 10 # idk if this is 10 spreads or boolean non-zero...
+        - Items.DamageHacksAreaAbility01_inline0 # dmg hack spread
+        - Items.QuickhacksSpreadOnStartAbility_inline0 # immediate spread
+        - $type: gamedataConstantStatModifier_Record # intrinsic upload bonus?
+          modifierType: Additive
+          statType: BaseStats.IntrinsicQuickHackUploadBonus
+          value: 1000
+        - $type: gamedataConstantStatModifier_Record # fast first in queue?
+          modifierType: Additive
+          statType: BaseStats.FirstHackInQueueUploadTimeDecrease
+          value: 1000
+        - $type: gamedataConstantStatModifier_Record # upload qh mod?
+          modifierType: Additive
+          statType: BaseStats.UploadQuickHackMod
+          value: 1000
+        - $type: gamedataConstantStatModifier_Record # queue upload speed?
+          modifierType: Additive
+          statType: BaseStats.QuickHackQueueUploadTimeDecrease
+          value: 1000
+      UIData:
+        $type: gamedataGameplayLogicPackageUIData_Record
+        localizedDescription: LocKey#PrecursorCyberdeck_qhoffense
+    - $type: gamedataGameplayLogicPackage_Record # quickhack defense
+      stats:
+        - $type: gamedataConstantStatModifier_Record # tracability add
+          modifierType: AdditiveMultiplier
+          statType: BaseStats.HackRevealPositionModifier
+          value: -1
+        # idk if any of these work. just throwing spaghetti at the wall
+        - $base: Items.NPCUploadTimeAbility03_inline0 # 100x time to be hacked
+          value: 101.0
+        - $type: gamedataConstantStatModifier_Record # hostile hack immunity ?
+          modifierType: Additive
+          statType: BaseStats.HasHostileHackImmunity
+          value: 1
+        - $type: gamedataConstantStatModifier_Record # npc hack immunity ?
+          modifierType: Additive
+          statType: BaseStats.HasImmunityToNPCQuickhacks
+          value: 1
+      UIData:
+        $type: gamedataGameplayLogicPackageUIData_Record
+        localizedDescription: LocKey#PrecursorCyberdeck_qhdefense
+    - $base: Items.UltimateCostAbility03 # reduced hack cost
+      stats:
+        - $base: Items.UltimateCostAbility03_inline0
+          value: 50
+        - $base: Items.StealthHacksCostAbility03_inline0
+          value: 50
+        - $base: Items.DeviceCostAbility03_inline0
+          value: 50
+      UIData:
+        $type: gamedataGameplayLogicPackageUIData_Record
+        localizedDescription: LocKey#PrecursorCyberdeck_qhefficiency
+    - $type: gamedataGameplayLogicPackage_Record # built-in hacks
+      UIData:
+        $type: gamedataGameplayLogicPackageUIData_Record
+        localizedDescription: LocKey#PrecursorCyberdeck_bultins
+  variants:
+    - Variants.Humanity0Cost
+  objectActions:
+    - DeviceAction.DataExtractionClassHack
+    - DeviceAction.MalfunctionClassHack
+    - DeviceAction.SetDeviceTagKillMode
+    - DeviceAction.ToggleStateClassHack
+    - DeviceAction.TakeControlClassHack
+    - DeviceAction.TakeControlCameraClassHack
+    - DeviceAction.HighPitchNoiseQuickHack
+    # overload
+    - DeviceAction.OverloadClassHack
+    - DeviceAction.OverloadClassLvl4Hack
+    - DeviceAction.ServerOverloadClassHack
+    # attitude
+    - DeviceAction.OverrideAttitudeClassHack
+    - DeviceAction.OverrideAttitudeClassLvl2Hack
+    - DeviceAction.OverrideAttitudeClassLvl3Hack
+    - DeviceAction.OverrideAttitudeClassLvl4Hack
+    - DeviceAction.OverrideAttitudeClassLvl5Hack
+    # turret
+    - DeviceAction.TurretOverloadClassHack
+    - DeviceAction.TurretOverrideAttitudeClassHack
+    - DeviceAction.TurretOverrideAttitudeClassLvl2Hack
+    - DeviceAction.TurretOverrideAttitudeClassLvl3Hack
+    - DeviceAction.TurretOverrideAttitudeClassLvl4Hack
+    - DeviceAction.TurretOverrideAttitudeClassLvl5Hack
+    - DeviceAction.TurretToggleStateClassHack
+    - DeviceAction.TurretToggleStateClassLvl2Hack
+    - DeviceAction.TurretToggleStateClassLvl3Hack
+    - DeviceAction.TurretToggleStateClassLvl4Hack
+    - DeviceAction.TurretToggleStateClassLvl5Hack
+    # vehicle
+    - DeviceAction.TakeControlVehicleClassHack
+    - DeviceAction.VehicleExplodeClassHack
+    - DeviceAction.VehicleAccelerateClassHack
+    - DeviceAction.VehicleForceBrakesClassHack
+    # Quickhacks
+    - QuickHack.BlindLvl4Hack
+    - QuickHack.PingLvl4PlusPlusHack
+    - QuickHack.GrenadeLvl4PlusPlusHack
+    - QuickHack.WhistleLvl4PlusPlusHack
+    - QuickHack.MadnessLvl4PlusPlusHack
+    - QuickHack.SuicideLvl4PlusPlusHack
+    - QuickHack.OverheatLvl4PlusPlusHack
+    - QuickHack.OverloadLvl4PlusPlusHack
+    - QuickHack.BrainMeltLvl4PlusPlusHack
+    - QuickHack.ContagionLvl4PlusPlusHack
+    - QuickHack.MemoryWipeLvl4PlusPlusHack
+    - QuickHack.CommsNoiseLvl4PlusPlusHack
+    - QuickHack.CommsCallInLvl4PlusPlusHack
+    - QuickHack.LocomotionMalfunctionLvl4Hack
+    - QuickHack.SystemCollapseLvl4PlusPlusHack
+    - QuickHack.CyberwareMalfunctionLvl4PlusPlusHack
