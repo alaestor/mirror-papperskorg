@@ -1,0 +1,2 @@
+# Hello, World!
+This is a simple Hello World which I use as a starting point for new C++ projects. It provides my usual style of `main()` entrypoint, `.hpp` headerguard, `.gitignore`, and `Tup` files, with my preferred GCC compiler options.

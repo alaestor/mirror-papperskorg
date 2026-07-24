@@ -1,0 +1,8 @@
+include_rules
+
+PROJ=main.exe
+LIBS=
+
+# Compile compilation units in src dir
+: foreach src/*.cpp |> !CC %f |> obj/%B.o <objs>
+: <objs> |> !LN %<objs> $(LIBS) |> $(PROJ)
