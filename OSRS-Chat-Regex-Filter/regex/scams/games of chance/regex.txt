@@ -1,0 +1,43 @@
+####
+#
+#	"Coin" gambling bots
+#
+####
+^we[il]c[o0]me,?\s*(t[o0]|play).*(coin|rank|games?|safe).*!
+^trading with .*\{current game.*\} id: \d{4,}
+(w[o0]n|[il][o0]st).*(being|destroying|dice|roll|sl[o0]ts \(.+\))
+(cashed.*in|has.*(been.*paid|traded))\s*:\s*\(?\d+(\.\d+)?([kmb]|\s?gp)\)? \@ [\[\(]?\d\d:\d\d:\d\d[\]\)]?
+in progress. Please wait...$
+^![a-zA-Z] enabled, .+:
+^![LHWFSDCJVP]
+^the current jackpot number is \d+
+^this machine only accepts coins\.
+^.+ declined the bet\.
+bet bonus is active!$
+####
+#
+#	"Coin" bots pretending to be gambling players
+#
+####
+^(((v,|very)\s)??tired of those autotyper venezuelans|dang bra, don't steal my win|never betting on venezuelan|(money\s?){3,})
+coin is the best$
+^i'?(m|ve) already (up|won) \d+(\.\d+)?([kmb]|\s?gp)
+####
+#
+#	f2p "jad 0m0m" et al
+#
+####
+(\(|!)[sjl].*(sl[o0]ts|j[a@]ckp[o0]t|l[o0]w).*\d+(\.\d+)?([kmb]|\s?gp)\-\d+(\.\d+)?([kmb]|\s?gp)
+has w[o0]n.*.*\d+(\.\d+)?([kmb]|\s?gp).*sl[o0t]ts?
+####
+#
+#	f2p "host bet"
+#
+####
+place your bet.*fight.*\d+(\.\d+)?([kmb]|\s?gp)
+####
+#
+#	f2p numberbot dice games
+#
+####
+(don't wait any longer|make your bet|good fun never stops).*\[[LHWFSDCJVP]!\]
