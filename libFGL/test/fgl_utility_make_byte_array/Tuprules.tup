@@ -1,0 +1,1 @@
+TEST_PREREQUISITE= $(TEST_DIR)/<fgl_types_ctypes>

@@ -1,0 +1,70 @@
+####	Dot Hidden Directories
+.*/
+
+####	Doxygen Output
+docs/html
+
+####	Misc.
+*.git_ignored
+git_ignored/
+_private/
+*.old
+*.lnk
+*.gsm
+
+####	Build Systems & IDEs
+tup.config
+build/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+*.cmake
+workspace.code-workspace
+*.gsm
+
+####	Output Directories
+output/
+bin/
+obj/
+dep/
+asm/
+logs/
+
+####	Binaries & Output Formats
+*.o
+*.a
+*.i
+*.ii
+*.exe
+*.spv
+*.dll
+*.bin
+*.jpg
+*.png
+*.bmp
+*.gif
+*.log
+
+####	Popular Archive Formats
+*.7z
+*.arc
+*.ark
+*.bz2
+*.cdx
+*.gz
+*.iso
+*.lz
+*.lz4
+*.pea
+*.rar
+*.s7z
+*.sz
+*.tar
+*.tbz2
+*.xz
+*.Z
+*.z
+*.zip
+*.zipx
+*.zst
+*.zz

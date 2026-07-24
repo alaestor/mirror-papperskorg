@@ -1,0 +1,2 @@
+#include "../hdr/ChildResWriter.h"
+XFILE_CHILDRESOURCEID RCDATA "../x_child/child.exe"

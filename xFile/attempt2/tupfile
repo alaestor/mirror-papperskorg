@@ -1,0 +1,45 @@
+#no spaces in project name
+N_PARENT = parent.exe
+N_CHILD = child.exe
+
+LIBS =
+
+FLAGS_NORM = -std=c++17 -fmax-errors=3
+FLAGS_NORM += -Wall -Wextra -Werror=pedantic -pedantic-errors -Wformat=2
+FLAGS_NORM += -Wshadow -Wreorder -Wduplicated-cond -Wduplicated-branches
+FLAGS_NORM += -Wnoexcept -Wconversion -Wsign-conversion -Wnon-virtual-dtor
+FLAGS_NORM += -Wsign-promo -Wdouble-promotion -Wold-style-cast -Wuseless-cast
+FLAGS_NORM += -Wcast-align -Wstrict-aliasing=1 -Wstrict-overflow=3
+FLAGS_NORM += -Wnull-dereference -Wzero-as-null-pointer-constant
+FLAGS_NORM += -flto-odr-type-merging -Wno-odr -fno-fat-lto-objects
+#-flto
+
+# -O3 -flto and -static break??? https://www.reddit.com/r/gcc/comments/a4j8f9/confused_about_behavior_when_combining_o3_flto/
+FLAGS_LINK = -s -fuse-linker-plugin -static
+#-static -static-libgcc
+
+FLAGS_CHILD = -Os $(FLAGS_NORM)
+FLAGS_PARENT = -O3 $(FLAGS_NORM)
+
+#debug
+#LIBS += -lasan
+#FLAGS_NORM += -fsanitize=address -fno-omit-frame-pointer
+#FLAGS_LINK += -fsanitize=address -fno-omit-frame-pointer
+
+# common objects
+: foreach src/*.cpp |> ^o^ g++ $(FLAGS_CHILD) -c %f -o %o |> obj/%B.o <objs>
+
+# child process
+: foreach x_child/*.cpp |> ^o^ g++ $(FLAGS_CHILD) -c %f -o %o |> obj/child/%B.o <objs_child>
+: <objs> <objs_child> |> g++ $(FLAGS_CHILD) $(FLAGS_LINK) %<objs> %<objs_child> -o %o $(LIBS) |> x_child/$(N_CHILD)
+
+# child process as binary resource to be embedded in parent
+: hdr/ChildResWriter.rc | x_child/$(N_CHILD) |> windres %f -O coff -o %o |> obj/%B.res <childRes>
+
+# parent process
+: foreach x_parent/*.cpp |> ^o^ g++ $(FLAGS_PARENT) -c %f -o %o |> obj/parent/%B.o <objs_parent>
+: <objs> <objs_parent> | <childRes> |> g++ $(FLAGS_PARENT) $(FLAGS_LINK) %<objs> %<objs_parent> %<childRes> -o %o $(LIBS) |> x_parent/$(N_PARENT)
+
+# unit test NOT IMPLEMENTED
+#: foreach test/*.cpp |> ^o^ g++ $(FLAGS_PARENT) -c %f -o %o |> test/obj/%B.o <objs>
+#: <objs> | <childRes> |> g++ $(FLAGS_PARENT) $(LFLAGS) %<objs> src/ChildResWriter.res -o %o $(LIBS) |> test/$(N_PARENT)

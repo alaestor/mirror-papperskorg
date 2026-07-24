@@ -1,0 +1,33 @@
+[settings]
+    arch=x86_64
+    build_type=Release
+    compiler=Visual Studio
+    compiler.runtime=MD
+    compiler.version=16
+    os=Windows
+
+[requires]
+    libFGL/main-c29d1832080d90a719c3f01cac47c13c458490b8
+
+[options]
+
+
+[full_settings]
+    arch=x86_64
+    build_type=Release
+    compiler=Visual Studio
+    compiler.runtime=MD
+    compiler.version=16
+    os=Windows
+
+[full_requires]
+    libFGL/main-c29d1832080d90a719c3f01cac47c13c458490b8@alaestor/main:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+
+[full_options]
+
+
+[recipe_hash]
+
+
+[env]
+

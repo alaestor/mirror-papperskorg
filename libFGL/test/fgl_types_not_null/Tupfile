@@ -1,0 +1,6 @@
+### Unmodified. If you modify this, remove this line and document your changes.
+include_rules
+: foreach src/*.cpp | $(TEST_PREREQUISITE) |> !C |> $(TEST_OBJ_DIR)/%d/%B.o {test_objs}
+: {test_objs} |> !L |> $(TEST_BIN_DIR)/%d/%d.exe {unit_test}
+: {unit_test} |> !RUN_TEST |> $(TEST_DIR)/<%d>
+: | $(TEST_DIR)/<%d> |> !PASSTHROUGH |> <unit_test_results>

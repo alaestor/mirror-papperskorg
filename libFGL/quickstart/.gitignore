@@ -1,0 +1,5 @@
+####	Dot Hidden Directories
+.*/
+
+####	Build directory
+build/

@@ -1,0 +1,18 @@
+#pragma once
+#ifndef FGLM_HPP_INCLUDED
+#define FGLM_HPP_INCLUDED
+
+/**
+@file
+@brief libFGL's "even more everything" header
+@details Includes all non-experimental headers, exposes
+	<tt>fgl::literals</tt>, and defines <tt>FGL_SHORT_MACROS</tt>
+*/
+
+#define FGL_SHORT_MACROS
+
+#include "./fgl.hpp"
+
+using namespace fgl::literals;
+
+#endif // FGLM_HPP_INCLUDED

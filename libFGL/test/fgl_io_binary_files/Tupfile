@@ -1,0 +1,13 @@
+#
+#
+# MODIFIED - needs to output a binary file
+#
+#
+include_rules
+: foreach src/*.cpp | $(TEST_PREREQUISITE) |> !C |> $(TEST_OBJ_DIR)/%d/%B.o {test_objs}
+: {test_objs} |> !L |> $(TEST_BIN_DIR)/%d/%d.exe {unit_test}
+
+# provides the file path and name relative to current working directory (tupfile)
+: {unit_test} |> !RUN_TEST $(TEST_BIN_DIR)/%d/%d.test_data.bin |> $(TEST_DIR)/<%d> | $(TEST_BIN_DIR)/%d/%d.test_data.bin
+
+: | $(TEST_DIR)/<%d> |> !PASSTHROUGH |> <unit_test_results>

@@ -1,0 +1,14 @@
+*.exe
+*.o
+*.png
+*.old
+.tup/
+bin/
+obj/
+dep/
+asm/
+test/bin/
+test/obj/
+test/*.txt
+test/*.log
+test/*.ini

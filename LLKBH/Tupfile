@@ -1,0 +1,24 @@
+#no spaces in project name
+PROJ = main.exe
+
+LIBS =
+
+# for flags and more, see https://gcc.gnu.org/onlinedocs/gcc/
+CFLAGS = -std=c17 -Os -s -Wall -Wextra -pedantic -fmax-errors=3 
+CFLAGS += -pedantic-errors -Werror=pedantic -Wundef -Wnull-dereference
+CFLAGS += -Wduplicated-cond -Wduplicated-branches -Wshadow -Waggregate-return
+CFLAGS += -Wswitch -Wswitch-enum -Wswitch-default -Wstrict-overflow=5 
+CFLAGS += -Wconversion -Wsign-conversion -Wfloat-equal -Wdouble-promotion
+CFLAGS += -Wwrite-strings -Wpointer-arith -Wcast-align=strict -Wcast-qual
+CFLAGS += -Wformat=2 -Wformat-signedness -Wformat-y2k -Wformat-overflow=2
+	# c flags
+CFLAGS += -Wstrict-prototypes -Wold-style-definition
+
+CFLAGS += -fanalyzer
+
+LFLAGS = -fuse-linker-plugin -flto -fno-fat-lto-objects
+#LFLAGS += -static
+
+# Compile compilation units in src dir
+: foreach src/*.c |> ^o^ gcc $(CFLAGS) $(LFLAGS) -c %f -o %o |> obj/%B.o <objs>
+: <objs> |> gcc $(CFLAGS) $(LFLAGS) %<objs> -o %o $(LIBS) |> $(PROJ)

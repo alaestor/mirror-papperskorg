@@ -1,0 +1,63 @@
+# Generated tup macros for conan dependencies
+#
+# Global composate macros:
+#	CONAN_INCLUDE_DIR
+#	CONAN_LIB_DIR
+#	CONAN_LIBS
+#	CONAN_DEFINES
+#	CONAN_CPPFLAGS
+#	CONAN_CFLAGS
+#	CONAN_SHAREDLINKFLAGS
+#	CONAN_EXELINKFLAGS
+#	CONAN_ALL
+#
+# Library specific macros use _library suffix
+# For example:	CONAN_LIBS_opencv
+
+CONAN_INCLUDE_DIR= -I"C:/Users/John Doe/.conan/data/libFGL/main-c29d1832080d90a719c3f01cac47c13c458490b8/alaestor/main/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
+
+CONAN_LIB_DIR= 
+
+CONAN_LIBS= 
+
+CONAN_DEFINES= 
+
+CONAN_CPPFLAGS= 
+
+CONAN_CFLAGS= 
+
+CONAN_SHAREDLINKFLAGS= 
+
+CONAN_EXELINKFLAGS= 
+
+CONAN_COMPILE= $(CONAN_INCLUDE_DIR) $(CONAN_DEFINES) $(CONAN_CPPFLAGS) $(CONAN_CFLAGS) $(CONAN_SHAREDLINKFLAGS)
+
+CONAN_LINK= $(CONAN_COMPILE) $(CONAN_LIB_DIR) $(CONAN_LIBS)
+
+
+
+
+
+# Conan package: libFGL
+
+CONAN_INCLUDE_DIR_libFGL= -I"C:/Users/John Doe/.conan/data/libFGL/main-c29d1832080d90a719c3f01cac47c13c458490b8/alaestor/main/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
+
+CONAN_LIB_DIR_libFGL= 
+
+CONAN_LIBS_libFGL= 
+
+CONAN_DEFINES_libFGL= 
+
+CONAN_CPPFLAGS_libFGL= 
+
+CONAN_CFLAGS_libFGL= 
+
+CONAN_SHAREDLINKFLAGS_libFGL= 
+
+CONAN_EXELINKFLAGS_libFGL= 
+
+CONAN_COMPILE_libFGL= $(CONAN_INCLUDE_DIR_libFGL) $(CONAN_DEFINES_libFGL) $(CONAN_CPPFLAGS_libFGL) $(CONAN_CFLAGS_libFGL) $(CONAN_SHAREDLINKFLAGS_libFGL)
+
+CONAN_LINK_libFGL= $(CONAN_COMPILE_libFGL) $(CONAN_LIB_DIR_libFGL) $(CONAN_LIBS_libFGL)
+
+conan_rootpath_libFGL = "C:/Users/John Doe/.conan/data/libFGL/main-c29d1832080d90a719c3f01cac47c13c458490b8/alaestor/main/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9"

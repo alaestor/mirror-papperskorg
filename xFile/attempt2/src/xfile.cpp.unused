@@ -1,0 +1,213 @@
+
+#include "../hdr/xfile.h"
+#include "../hdr/xfile_internal_objects.h"
+#include "../hdr/ResourceManager.h"
+
+xfile::internal::
+
+void xfile::start(const bool preloadFiles)
+{
+	using namespace internal;
+	if (resourceManager.exists(resource.packedManifest))
+	{
+		const auto size = resourceManager.size(resource.packedManifest);
+		PackedManifest pm(size);
+		resourceManager.read(resource.packedManifest, pm.data());
+		manifest.unpack(pm);
+	}
+	if (preloadFiles)
+	{
+		for (auto end = manifest.maxIndex(), i = 0; i < end; ++i)
+		{
+			auto name = manifest.filename(i);
+			manifest.resize(i, resourceManager.size(name));
+			resourceManager.read(name, manifest.buffer(i));
+		}
+	}
+}
+
+void xfile::start()
+{
+	start(false);
+}
+
+void xfile::stop()
+{
+	using namespace internal;
+
+	{ // block to destroy child info
+	std::size_t childSize;
+	const auto childData = resourceManager.expose(resource.child, childSize);
+	childManager.createChildExecutableFile(childData, childSize);
+	}
+
+	resourceManager.beginWrite(childManager.childPath());
+
+	const auto& pm = manifest.pack();
+	resourceManager.write(resource.packedManifest, pm.data(), pm.size());
+
+	for (auto end = manifest.maxIndex(), i = 0; i < end; ++i)
+	{ // write the resources from manifest that are flagged toUpdate
+		if (manifest.toUpdate(i))
+		{
+			resourceManager.write(
+				manifest.filename(i),
+				manifest.buffer(i),
+				manifest.size(i)
+			);
+		}
+	}
+
+	resourceManager.endWrite();
+
+	syncro.makePipeAndPacket();
+	syncro.writePacketToPipeAndDisconnect();
+
+	ChildManager.executeChild();
+}
+
+Handle xfile::open(const std::string& filename)
+{
+	using namespace internal;
+	return manifest.open(filename);
+}
+
+Handle xfile::create(const std::string& filename)
+{
+	using namespace internal;
+	if (filename.at(0) == '_') throw std::invalid_argument(
+		"xfile: create() name began with underscore (reserved)");
+
+	return manifest.create(filename);
+}
+
+void xfile::deleteFile(Handle handle)
+{
+	using namespace internal;
+	if (handle = invalid_handle) throw std::invalid_argument(
+		"xfile: deleteFile() recieved an invalid handle");
+
+	manifest.flagToRemove(handle);
+}
+
+void xfile::deleteFile(const std::string& filename)
+{
+	using namespace internal;
+	manifest.flagToRemove(filename);
+}
+
+std::size_t xfile::read(void* bufferOut, const std::size_t size, Handle handle)
+{
+	using namespace internal;
+	if (handle == invalid_handle) throw std::invalid_argument(
+		"xfile: read() recieved an invalid handle");
+
+	if (bufferOut == nullptr || size == 0) return 0;
+
+	// if internal buffer is not being used, read from the resource directly
+	std::size_t fileBufferSize = manifest.size(handle);
+	const unsigned char *const buffer = fileBufferSize == 0 ?
+		resourceManager.expose(manifest.filename(handle), fileBufferSize)
+		: manifest.buffer(handle);
+
+	if (size > fileBufferSize) throw std::runtime_error(
+		"xfile: read() size specified is greater than file");
+
+	std::memcpy(bufferOut, buffer, size);
+	return size;
+}
+
+static inline void xfile::internal::updateFileBuffer(
+	Handle handle,
+	const void* bufferIn,
+	const std::size_t size)
+{ // assumes safety
+	using namespace internal;
+	manifest.toUpdate(handle, true);
+	std::memcpy(manifest.buffer(handle), bufferIn, size);
+}
+
+/*
+	write() && writeNoResize()
+	if size is zero, the function will return without throwing exceptions,
+	even if other parameters were invalid.
+*/
+
+void xfile::write(Handle handle, const void* bufferIn, const std::size_t size)
+{
+	using namespace internal;
+	if (size == 0) return 0;
+	if (handle == invalid_handle) throw std::invalid_argument(
+		"xfile: write() recieved an invalid handle");
+	if (bufferIn == nullptr) throw std::invalid_argument(
+		"xfile: write() recieved nullptr");
+
+	if (size > manifest.size(handle)) manifest.resizeToPage(handle, size);
+
+	updateFileBuffer(handle, bufferIn, size);
+}
+
+void xfile::writeNoResize(
+	Handle handle,
+	const void* bufferIn,
+	const std::size_t size)
+{
+	using namespace internal;
+	if (size == 0) return 0;
+	if (handle == invalid_handle) throw std::invalid_argument(
+		"xfile: writeNoResize() recieved an invalid handle");
+	if (bufferIn == nullptr) throw std::invalid_argument(
+		"xfile: writeNoResize() recieved nullptr");
+	if (size > manifest.size(handle)) throw std::runtime_error(
+		"xfile: writeNoResize() specified size > filesize");
+
+	// TODO should we write what we can?
+
+	updateFileBuffer(handle, bufferIn, size);
+}
+
+std::size_t xfile::getFileSize(Handle handle)
+{
+	using namespace internal;
+	if (handle = invalid_handle) throw std::invalid_argument(
+		"xfile: getFileSize() recieved an invalid handle");
+
+	return manifest.size(handle);
+}
+
+void xfile::resizeFile(Handle handle, const std::size_t size)
+{
+	using namespace internal;
+	if (handle = invalid_handle) throw std::invalid_argument(
+		"xfile: resizeFile() recieved an invalid handle");
+
+	manifest.resizeToPage(handle, size);
+}
+
+void xfile::resizeFileExactly(Handle handle, const std::size_t size)
+{ // guarentees reserved size to nearest pagesize
+	using namespace internal;
+	if (handle = invalid_handle) throw std::invalid_argument(
+		"xfile: resizeFileExactly() recieved an invalid handle");
+
+	manifest.resize(handle, size);
+}
+
+void xfile::shrinkFileToFit(Handle handle)
+{
+	using namespace internal;
+	if (handle = invalid_handle) throw std::invalid_argument(
+		"xfile: shrinkFileToFit() recieved an invalid handle");
+
+	manifest.shrinkToFit(handle, size);
+}
+
+void xfile::shrinkAllFilesToFit(Handle handle)
+{
+	using namespace internal;
+	if (handle = invalid_handle) throw std::invalid_argument(
+		"xfile: shrinkAllFilesToFit() recieved an invalid handle");
+
+	for (auto end = manifest.maxIndex(), i = 0; i < end; ++i)
+		manifest.shrinkToFit(i);
+}

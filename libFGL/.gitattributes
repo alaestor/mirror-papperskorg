@@ -1,0 +1,4 @@
+docs/** linguist-documentation=true
+
+# Not truly "vendored" but for packaging; not part of the library itself.
+conanfile.py linguist-vendored=true

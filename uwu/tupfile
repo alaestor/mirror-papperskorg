@@ -1,0 +1,21 @@
+#no spaces in project name
+PROJ = main.exe
+
+LIBS = -lpsapi
+
+CFLAGS = -std=c++17 -Os -fmax-errors=3
+CFLAGS += -Wall -Wextra -Werror=pedantic -pedantic-errors -Wformat=2
+CFLAGS += -Wshadow -Wreorder -Wduplicated-cond -Wduplicated-branches
+CFLAGS += -Wnoexcept -Wconversion -Wsign-conversion -Wnon-virtual-dtor
+CFLAGS += -Wsign-promo -Wdouble-promotion -Wold-style-cast -Wuseless-cast
+CFLAGS += -Wcast-align -Wstrict-aliasing=1 -Wstrict-overflow=3
+CFLAGS += -Wnull-dereference -Wzero-as-null-pointer-constant
+CFLAGS += -flto-odr-type-merging -Wno-odr -fno-fat-lto-objects
+#-flto
+
+# -O3 -flto and -static break??? https://www.reddit.com/r/gcc/comments/a4j8f9/confused_about_behavior_when_combining_o3_flto/
+LFLAGS = -s -fuse-linker-plugin -static
+
+# Compile compilation units in src dir
+: foreach src/*.cpp |> ^o^ g++ $(CFLAGS) -c %f -o %o |> obj/%B.o <objs>
+: <objs> |> g++ $(CFLAGS) $(LFLAGS) %<objs> -o %o $(LIBS) |> $(PROJ)

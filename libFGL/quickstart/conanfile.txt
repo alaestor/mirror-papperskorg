@@ -1,0 +1,5 @@
+[requires]
+libFGL/latest@alaestor/main
+
+[generators]
+cmake

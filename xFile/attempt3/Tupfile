@@ -1,0 +1,46 @@
+#no spaces in project name
+
+NAME_XWRITER = xwriter
+NAME_TESTBED = testbed
+
+LIBS =
+
+# for flags and more, see https://gcc.gnu.org/onlinedocs/gcc/
+CXXFLAGS = -std=c++20 -Os -s -Wall -Wextra -pedantic -fmax-errors=3 
+CXXFLAGS += -pedantic-errors -Werror=pedantic -Wundef -Wnull-dereference
+CXXFLAGS += -Wduplicated-cond -Wduplicated-branches -Wshadow
+CXXFLAGS += -Wswitch -Wswitch-enum -Wswitch-default -Wstrict-overflow=5 
+CXXFLAGS += -Wconversion -Wsign-conversion -Wfloat-equal -Wdouble-promotion
+CXXFLAGS += -Wwrite-strings -Wpointer-arith -Wcast-align=strict -Wcast-qual
+CXXFLAGS += -Wformat=2 -Wformat-signedness -Wformat-y2k -Wformat-overflow=2
+#-Waggregate-return
+
+# C++ dialect specific stuff
+#-Weffc++
+CXXFLAGS += -Wnoexcept -Wuseless-cast -Wold-style-cast
+CXXFLAGS += -Wnon-virtual-dtor -Wsuggest-final-types -Wsuggest-final-methods
+CXXFLAGS += -Wsuggest-override -Wsized-deallocation -Wextra-semi
+CXXFLAGS += -Wmultiple-inheritance -Wzero-as-null-pointer-constant
+#CXXFLAGS += -fanalyzer
+
+# mutually exclusive address/thread, need to link `-lasan` lib
+#CXXFLAGS += -fsanitize=address,undefined
+#CXXFLAGS += -fsanitize=thread,undefined
+
+LFLAGS = -fuse-linker-plugin -flto -fno-fat-lto-objects
+
+# common objects
+: foreach src/*.cpp |> ^o^ g++ $(CXXFLAGS) $(LFLAGS) -c %f -o %o |> obj/common/%B.o <common_objs>
+
+# embedded binary object xWriter (see ./hdr/xWriter.hpp)
+: foreach $(NAME_XWRITER)/src/*.cpp |> ^o^ g++ $(CXXFLAGS) $(LFLAGS) -c %f -o %o |> obj/$(NAME_XWRITER)/%B.o <xwriter_objs>
+: <xwriter_objs> | <common_objs> |> g++ $(CXXFLAGS) $(LFLAGS) %<xwriter_objs> %<common_objs> -o %o $(LIBS) |> bin/$(NAME_XWRITER)/$(NAME_XWRITER).exe {xwriter}
+: {xwriter} |> objcopy -I binary -O elf64-x86-64 -B i386:x86-64 "%f" "%o" |> obj/$(NAME_XWRITER)/%B.o <objs>
+
+# xfile library TODO
+#
+# ------------------
+
+# testbed
+: foreach $(NAME_TESTBED)/src/*.cpp |> ^o^ g++ $(CXXFLAGS) $(LFLAGS) -c %f -o %o |> obj/$(NAME_TESTBED)/%B.o <objs>
+: <objs> | <common_objs> |> g++ $(CXXFLAGS) $(LFLAGS) %<objs> %<common_objs> -o %o $(LIBS) |> bin/$(NAME_TESTBED)/$(NAME_TESTBED).exe
