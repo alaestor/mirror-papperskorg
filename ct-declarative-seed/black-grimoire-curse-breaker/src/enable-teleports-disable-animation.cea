@@ -1,0 +1,6 @@
+[ENABLE]
+ui_teleports_disableAnimation:
+  db 1
+[DISABLE]
+ui_teleports_disableAnimation:
+  db 0

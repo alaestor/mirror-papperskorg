@@ -1,0 +1,8 @@
+{$lua}
+if syntaxcheck then return end
+-- Original name: Mossneedle Pond Spawn
+[ENABLE]
+assert(TeleportPlayer, 'TeleportPlayer() not found')
+TeleportPlayer({x=1079.591553, y=32.622284, z=418.495605})
+alce.cheattable.disableAfterSuccess()
+[DISABLE]

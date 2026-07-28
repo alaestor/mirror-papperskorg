@@ -1,0 +1,18 @@
+{$lua}
+if syntaxcheck then return end
+[ENABLE]
+assert(PlayerInventory)
+
+local nextEmptySlot = mc['UI_Inventory+ItemSlot']:instance(PlayerInventory:FindNextEmptySlot())
+local usingSlot = mc['UI_Inventory+ItemSlot']:instance(PlayerInventory.usingItemSlot)
+PlayerInventory['AddItem(int,int,int,bool,bool)'](usingSlot.itemId, usingSlot.itemAmount, usingSlot.slotId, true, true)
+--[[ debugging...  The `AddItem` overloads that dont take a slotid seems to crash the game...
+alce.cfg.debug_print = true
+local itemId = usingSlot.itemId
+assert(GameItemID2Name[itemId], 'Got unknown ID: ' .. tostring(itemId))
+alce.i('rev', {PlayerInventory['AddItem(int,int,int,bool,bool)'](usingSlot.itemId, usingSlot.itemAmount, usingSlot.slotId, true, true)})
+alce.cfg.debug_print = false
+--]]
+
+alce.cheattable.disableAfterSuccess()
+[DISABLE]

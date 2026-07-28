@@ -1,0 +1,16 @@
+{$lua}
+[ENABLE]
+
+local ppc = mc.PostProcessingChanger:instanceFrom(mc.CBCameraController.static.instance, mc.CBCameraController.offset.postprocessing)
+
+for _,v in pairs({
+  'aoIntensity',
+  'aoRadius',
+  'saturation',
+  'focusDistance'
+})
+do ppc[v] = ppc['start_'..v] end
+
+alce.cheattable.disableAfterSuccess()
+[DISABLE]
+

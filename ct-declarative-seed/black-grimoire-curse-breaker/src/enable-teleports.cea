@@ -1,0 +1,30 @@
+{$lua}
+if syntaxcheck then return end
+
+TeleUI = TeleUI or alce.AllocateSymbols({alce.T[vtByte]('disableAnimation')}, {symbolPrefix = 'ui_teleports_'})
+--TeleUI.disableAnimation = true
+
+[ENABLE]
+local Player = mc.Player:instanceFrom(mc.Player.static.instance)
+local PlayerAttacks = mc.PlayerAttacks:instanceFrom(mc.Player.static.instance, mc.Player.offset.playerAttacks)
+local PlayerTransform = mc['UnityEngine.Transform']:instance(Player:get_transform())
+local vec3 = mc['UnityEngine.Vector3']:instance(mono_object_new(mc['UnityEngine.Vector3'].id)) -- for use as argument
+
+TeleUI:register()
+
+GetPlayerPosition = function() --> {x,y,z}
+  return PlayerTransform:get_position()
+end
+
+TeleportPlayer = function(coords) -- expects {x,y,z}
+  for _,axis in pairs({'x','y','z'}) do vec3[axis] = coords[axis] end
+  local addr = vec3.__baseAddress + mc['UnityEngine.Vector3'].startOffset
+  if TeleUI.disableAnimation == 0 then PlayerAttacks['TeleportSpell(UnityEngine.Vector3,bool)'](addr, true)
+  else Player:Teleport(addr) end
+end
+
+[DISABLE]
+
+TeleportPlayer = nil
+GetPlayerPosition = nil
+TeleUI:unregister()

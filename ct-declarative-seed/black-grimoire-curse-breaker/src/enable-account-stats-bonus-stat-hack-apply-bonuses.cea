@@ -1,0 +1,33 @@
+{$lua}
+if syntaxcheck then return end
+
+BonusStatsLastAppliesValues = BonusStatsLastAppliesValues or {}
+local T = alce.T[PSTAT.type]
+
+[ENABLE]
+
+-- add bonuses to stats
+for _,name in pairs(BonusStatSymbols.__names) do
+  local addr = PSTAT.nameToAddress[name]
+  assert(addr, 'Failed to find PSTAT address for name: ' .. tostring(name))
+  local bonus = BonusStatSymbols[name]
+  if bonus ~= 0 then
+    BonusStatsLastAppliesValues[name] = bonus
+    T:write(addr, T:read(addr) + bonus)
+  end
+end
+
+[DISABLE]
+
+-- remove the bonuses that we added
+for _,name in pairs(BonusStatSymbols.__names) do
+  local addr = PSTAT.nameToAddress[name]
+  if not addr then alce.warn('Failed to find PSTAT address for name: ' .. tostring(name)) end
+  local bonus = BonusStatSymbols[name]
+  if bonus ~= 0 then
+    T:write(addr, T:read(addr) - bonus)
+  end
+end
+
+BonusStatsLastAppliesValues = nil
+

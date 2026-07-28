@@ -1,0 +1,13 @@
+{$lua}
+if syntaxcheck then return end
+
+assert(GetPlayerPosition, 'GetPlayerPosition() not found')
+assert(TeleportPlayer, 'TeleportPlayer() not found')
+
+[ENABLE]
+TeleportRecallPos = GetPlayerPosition()
+
+[DISABLE]
+TeleportPlayer(TeleportRecallPos)
+TeleportRecallPos = nil
+

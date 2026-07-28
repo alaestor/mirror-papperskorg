@@ -1,0 +1,10 @@
+{$lua}
+if syntaxcheck then return end
+InvUI = InvUI or alce.AllocateSymbols({alce.T[vtDword]('slotNumberSelection')}, {symbolPrefix = 'ui_inventory_'})
+
+[ENABLE]
+InvUI:register()
+InvUI.slotNumberSelection = 35 -- default, bottom right
+[DISABLE]
+InvUI:unregister()
+

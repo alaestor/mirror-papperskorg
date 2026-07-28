@@ -1,0 +1,46 @@
+{$lua}
+if syntaxcheck then return end
+PSTAT = nil
+
+[ENABLE]
+alce.mono.init()
+
+function initPlayerStats(optional_createMissingStats)
+  local playerUnitStats = mc.UnitStats:instanceFrom(mc.Player.static.instance, mc.Unit.offset.stats)
+  local valueOffset = alce.check(mc['StatsHandler+Stat'].offset.value, alce.isOffsetlike)
+  local valueType = alce.T[mc['StatsHandler+Stat'].meta.offset.value.vtype]
+  local names={}
+  local nameToAddress={}
+  for name,enumValue in pairs(mc['StatsHandler+StatType'].const) do
+    if name == 'none' then goto continue end -- skip the 'none' skill...
+    local enumArg = alce.T[vtDword](enumValue)
+    local ptr = playerUnitStats:GetStat(enumArg)
+    if not alce.isAddresslike(ptr) and optional_createMissingStats then
+      -- stat doesn't exist already, so we'll try adding it. Likes to crash if passing
+      -- 0.0 as the value for some reason, so we'll just make it 1.0 and zero it after.
+      alce.debug(string.format('Stat "%s" was missing... Attempting to add: 0x%X (%i)', name, enumValue, enumValue))
+      playerUnitStats['AddStat(StatsHandler+StatType,single,bool)'](enumArg, valueType(1.0), true)
+      ptr = playerUnitStats:GetStat(enumArg) -- one more time ...
+      if alce.isAddresslike(ptr) then
+        valueType:write(ptr + valueOffset, 0) -- reset the value
+      else
+        alce.warn('Failed to create missing stat: ' .. name)
+        ptr = nil
+      end
+    end
+    if ptr then
+      table.insert(names, name)
+      nameToAddress[name] = ptr + valueOffset
+    end
+    ::continue::
+  end
+  table.sort(names)
+  return {names=names, nameToAddress=nameToAddress, type=valueType.vType}
+end
+
+PSTAT = initPlayerStats(true)
+
+--alce.i('pstat', PSTAT)
+
+[DISABLE]
+

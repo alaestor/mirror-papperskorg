@@ -1,0 +1,44 @@
+{$lua}
+if syntaxcheck then return end
+[ENABLE]
+--alce.cfg.debug_print = false
+alce.mono.init()
+mc = alce.mono.ClassTable:new()
+
+mc:addFromImage('Assembly-CSharp',
+  'Unit',
+  'Player',
+  'PlayerAttacks',
+--  'PlayerHealth',
+--  'AbilityHandler',
+--  'AbilityHandler+Ability',
+--  'AbilityHandler+AbilityCooldown',
+--  'AbilityHandler+SpellBookType',
+--  'AbilityHandler+SpellIngredient',
+  'UnitStats',
+--  'UnitAttacks',
+  'UnitPathFinder',
+  'UnitSkills',
+  'UnitSkills+Skill',
+--  'StatsHandler',
+  'StatsHandler+Stat',
+  'StatsHandler+StatType',
+  'SkillsHandler+SkillType',
+  'UI_CharacterCreation',
+  'UI_Inventory',
+  'UI_Inventory+ItemSlot',
+  'ItemHandler',
+  'ItemHandler+Item',
+  'ItemHandler+ItemCategory',
+  'ItemHandler+ItemType',
+  'CBCameraController',
+  'PostProcessingChanger'
+):addFromImage('UnityEngine.CoreModule',
+  'UnityEngine.Vector3',
+  'UnityEngine.Transform'
+)
+
+mc:loadWithParents()
+
+[DISABLE]
+mc:clear()
