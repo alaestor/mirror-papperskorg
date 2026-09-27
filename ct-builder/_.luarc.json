@@ -1,0 +1,7 @@
+{
+  "runtime.version": "Lua 5.3",
+  "workspace.library": [
+    "${env:FNLUA_ANNOTATIONS_PATH}",
+    "./src"
+  ]
+}
