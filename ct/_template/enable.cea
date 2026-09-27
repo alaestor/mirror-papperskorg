@@ -1,0 +1,18 @@
+{$lua}
+if syntaxcheck then return end
+[ENABLE]
+--alce.cfg.debug_print = false
+
+alce.mono.init()
+mc = alce.mono.ClassTable.new({})
+
+mc:addFromImage({
+  image = 'Assembly-CSharp',
+  targets = {
+    'MyClass'
+  },
+})
+mc:load()
+
+[DISABLE]
+mc:clear()

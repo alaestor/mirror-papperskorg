@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime": {
+    "version": "Lua 5.3",
+    "path": [
+      "${env:ALCE_SOURCE_PATH}/?.lua"
+    ],
+    "pathStrict": true
+  },
+  "workspace": {
+    "ignoreDir": [
+      ".git",
+      "__reference"
+    ],
+    "library": [
+      "${env:ALCE_SOURCE_PATH}",
+      "${env:CE_ANNOTATIONS_PATH}",
+      "${env:FNLUA_ANNOTATIONS_PATH}"
+    ]
+  }
+}

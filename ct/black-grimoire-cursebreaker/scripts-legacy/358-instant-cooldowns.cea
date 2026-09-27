@@ -1,0 +1,66 @@
+{ Game   : Cursebreaker.exe
+  Version: Steam, build ID 23560986
+  Date   : 2026-06-04
+}
+
+define(address,UnitAttacks:UpdateAbilityCooldowns+89)
+define(bytes,F2 0F 5A E8 F3 0F 11 6F 14)
+
+[ENABLE]
+
+assert(address,bytes)
+alloc(newmem,$1000,UnitAttacks:UpdateAbilityCooldowns+89)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  cvtsd2ss xmm5,xmm0
+  movss [rdi+14],xmm5
+// --------------------
+  push rbx
+  mov rax,[$mc.Player.static.instance]
+  add rax,$mc.Player.offset.playerAttacks
+  mov rax,[rax]
+  pop rbx
+  cmp rsi, rax
+  jne return
+  // its the player;
+  xorps xmm0, xmm0
+  movss [rdi+14], xmm0
+// --------------------
+  jmp return
+
+address:
+  jmp newmem
+  nop 4
+return:
+
+[DISABLE]
+
+address:
+  db bytes
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: UnitAttacks:UpdateAbilityCooldowns+89
+
+UnitAttacks:UpdateAbilityCooldowns+70: 41 FF D3                       - call r11
+UnitAttacks:UpdateAbilityCooldowns+73: F3 0F 5A D0                    - cvtss2sd xmm2,xmm0
+UnitAttacks:UpdateAbilityCooldowns+77: F2 0F 10 45 E0                 - movsd xmm0,[rbp-20]
+UnitAttacks:UpdateAbilityCooldowns+7c: F2 0F 10 4D D8                 - movsd xmm1,[rbp-28]
+UnitAttacks:UpdateAbilityCooldowns+81: F2 0F 59 CA                    - mulsd xmm1,xmm2
+UnitAttacks:UpdateAbilityCooldowns+85: F2 0F 5C C1                    - subsd xmm0,xmm1
+// ---------- INJECTING HERE ----------
+UnitAttacks:UpdateAbilityCooldowns+89: F2 0F 5A E8                    - cvtsd2ss xmm5,xmm0
+UnitAttacks:UpdateAbilityCooldowns+8d: F3 0F 11 6F 14                 - movss [rdi+14],xmm5
+// ---------- DONE INJECTING  ----------
+UnitAttacks:UpdateAbilityCooldowns+92: F3 0F 10 47 14                 - movss xmm0,[rdi+14]
+UnitAttacks:UpdateAbilityCooldowns+97: F3 0F 5A C0                    - cvtss2sd xmm0,xmm0
+UnitAttacks:UpdateAbilityCooldowns+9b: 66 0F 57 C9                    - xorpd xmm1,xmm1
+UnitAttacks:UpdateAbilityCooldowns+9f: 66 0F 2F C8                    - comisd xmm1,xmm0
+UnitAttacks:UpdateAbilityCooldowns+a3: 0F 82 1A 00 00 00              - jb UnitAttacks:UpdateAbilityCooldowns+c3
+}

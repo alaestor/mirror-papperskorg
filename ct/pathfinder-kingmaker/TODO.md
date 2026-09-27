@@ -1,0 +1,1 @@
+debug buttons should audo-disable

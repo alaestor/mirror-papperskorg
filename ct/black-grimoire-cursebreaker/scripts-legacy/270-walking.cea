@@ -1,0 +1,7 @@
+[ENABLE]
+[[mc.Player.static.instance]+mc.Player.offset.pfinder]+mc.UnitPathFinder.offset.walking:
+db 01
+[DISABLE]
+[[mc.Player.static.instance]+mc.Player.offset.pfinder]+mc.UnitPathFinder.offset.walking:
+db 00
+

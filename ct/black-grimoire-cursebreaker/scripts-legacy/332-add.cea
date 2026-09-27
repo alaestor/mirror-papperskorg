@@ -1,0 +1,49 @@
+{$lua}
+if syntaxcheck then return end
+[ENABLE]
+-- prep
+assert(PlayerInventory)
+assert(GameItemDropdownString)
+local topmr = AddressList.getMemoryRecordByDescription('-------/ Inventory Slots \\-------')
+assert(topmr)
+-- process user input & prevent duplication
+local chosenSlot = InvUI.slotNumberSelection
+assert(chosenSlot>0 and chosenSlot<36, 'valid slot numbers are 1..35')
+local mrName = 'Slot '..tostring(chosenSlot)
+assert(nil==AddressList.getMemoryRecordByDescription(mrName), 'Already exists? Delete record "'..mrName..'" and try again')
+local function symbol() return 'InventorySlot'..tostring(chosenSlot) end
+_G[symbol()] = PlayerInventory:GetSlotByIndex(chosenSlot)
+-- create table entries
+local function f(offset) return symbol()..'+'..offset end
+local ddSettings = {
+  options=GameItemDropdownString,
+  hideNumbers=true,
+}
+local itemmr = alce.cheat_table.createHeader({
+  parent = topmr,
+  description = mrName,
+  showCollapseButtons = true,
+})
+
+alce.cheat_table.createRecord({
+  parent = itemmr,
+  description = 'Item',
+  vtype = vtDword,
+  address = f("mc['UI_Inventory+ItemSlot'].offset.itemId"),
+  dropDownSettings = ddSettings,
+})
+alce.cheat_table.createRecord({
+  parent = itemmr,
+  description = 'ID#',
+  vtype = vtDword,
+  address = f("mc['UI_Inventory+ItemSlot'].offset.itemId"),
+})
+alce.cheat_table.createRecord({
+  parent = itemmr,
+  description = 'Quantity',
+  vtype = vtDword,
+  address = f("mc['UI_Inventory+ItemSlot'].offset.itemAmount"),
+})
+
+alce.cheat_table.disableAfterSuccess({})
+[DISABLE]

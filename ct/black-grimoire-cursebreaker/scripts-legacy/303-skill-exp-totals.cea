@@ -1,0 +1,34 @@
+{$lua}
+if syntaxcheck then return end
+
+[ENABLE]
+alce.mono.init() -- make sure the monopipe is good since we'll be invoking methods
+alce.cheat_table.clearChildren(alce.THIS) -- make sure we start fresh
+local skills = alce.mono_t.List:newFromChain(mc.Player.static.instance, mc.Unit.offset.levels, mc.UnitSkills.offset.skills)
+local size = skills:size()
+assert(size > 0, 'Got too few skills; something probably went wrong...')
+assert(size < 16, 'Got very large number of skills; something probably went wrong...')
+local names = {}
+local nameToAddress = {}
+for index = 0, size - 1 do -- populate the table with each skill's name and the address of its XP
+    local skill = skills:atUnsafe(index)
+    local skillType = readInteger(skill + mc['UnitSkills+Skill'].offset.skillType)
+    local skillName = alce.utils.keyFromValue({
+        value = skillType,
+        table = mc['SkillsHandler+SkillType'].const,
+    })
+    table.insert(names, skillName)
+    nameToAddress[skillName] = skill + mc['UnitSkills+Skill'].offset.xp
+end
+table.sort(names)
+for _,name in pairs(names) do
+    alce.cheat_table.createRecord({
+        parent = alce.THIS,
+        description = name,
+        vtype = vtSingle,
+        address = nameToAddress[name],
+    })
+end
+
+[DISABLE]
+alce.cheat_table.clearChildren(alce.THIS)

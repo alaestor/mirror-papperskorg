@@ -1,0 +1,7 @@
+[ENABLE]
+[mc.Player.static.instance]+mc.Player.offset.immuneToDamage:
+db 01
+[DISABLE]
+[mc.Player.static.instance]+mc.Player.offset.immuneToDamage:
+db 00
+

@@ -1,0 +1,16 @@
+{$lua}
+if syntaxcheck then return end
+alce.cheat_table.clearChildren(alce.THIS)
+
+[ENABLE]
+
+for _,name in pairs(PSTAT.names) do
+  alce.cheat_table.createRecord({
+    parent = alce.THIS,
+    description = name,
+    vtype = PSTAT.type,
+    address = PSTAT.nameToAddress[name],
+  })
+end
+
+[DISABLE]

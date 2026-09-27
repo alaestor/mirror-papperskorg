@@ -1,0 +1,17 @@
+{$lua}
+if syntaxcheck then return end
+
+[ENABLE]
+assert(PlayerInventory)
+local slot = mc['UI_Inventory+ItemSlot']:instance({
+  baseAddress = PlayerInventory.usingItemSlot,
+})
+local id = slot.itemId
+assert(GameItemID2Name[id], 'Got an invalid ID: ' .. tostring(id))
+local maxStack = mc['ItemHandler+Item']:instance({
+  baseAddress = GameItemHandler:GetItem(id),
+}).maxStack
+assert(alce.validators.isPositiveInteger(maxStack), 'Got an invalid number for max stack: ' .. tostring(maxStack))
+slot.itemAmount = maxStack
+alce.cheat_table.disableAfterSuccess({})
+[DISABLE]

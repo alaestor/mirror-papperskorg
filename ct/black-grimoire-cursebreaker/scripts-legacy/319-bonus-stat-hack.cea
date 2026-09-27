@@ -1,0 +1,65 @@
+{$lua}
+if syntaxcheck then return end
+local childName = 'Bonus Values'
+BonusStatValuesMR = BonusStatValuesMR or alce.cheat_table.createRecord({
+  parent = alce.THIS,
+  description = childName,
+})
+BonusStatSymbolPrefix = 'CFG_BONUSSTAT_'
+
+local args = {}
+local t=alce.T[PSTAT.type]
+for _,name in pairs(PSTAT.names) do table.insert(args, t(name)) end
+BonusStatSymbols = BonusStatSymbols or alce.memory.AllocateSymbols({
+  packets = args,
+  doNotRegister = true,
+  symbolPrefix = BonusStatSymbolPrefix,
+})
+
+local defaultBonusValues = {
+  ['CritterSlaying'] = 0,
+  ['DamageVsBeasts'] = 0,
+  ['DamageVsUndead'] = 0,
+  ['accuracyMagical'] = 30,
+  ['accuracyPhysical'] = 30,
+  ['accuracyRanged'] = 30,
+  ['critical'] = 0,
+  ['damageMagical'] = 10,
+  ['damagePhysical'] = 10,
+  ['damageRanged'] = 10,
+  ['harvestingSpeedWoodcutting'] = 10,
+  ['healing'] = 0,
+  ['health'] = 0,
+  ['healthregen'] = 5,
+  ['mana'] = 0,
+  ['manaregen'] = 5,
+  ['movementSpeed'] = 3,
+  ['power'] = 0,
+  ['resistanceMagical'] = 20,
+  ['resistancePhysical'] = 20,
+  ['resistanceRanged'] = 20,
+}
+
+[ENABLE]
+
+BonusStatValuesMR.isGroupHeader = true
+BonusStatSymbols:register()
+for _,name in pairs(BonusStatSymbols.__names) do
+  local symbol = BonusStatSymbols.__registered[name]
+  alce.cheat_table.createRecord({
+    parent = BonusStatValuesMR,
+    description = name,
+    vtype = PSTAT.type,
+    address = symbol,
+  })
+end
+for k,v in pairs(defaultBonusValues) do
+  if BonusStatSymbols.__addresses[k] then BonusStatSymbols[k] = v
+  else alce.warn('BonusStat key not found: ' .. tostring(k)) end
+end
+
+[DISABLE]
+
+BonusStatValuesMR.destroy()
+BonusStatValuesMR = nil
+BonusStatSymbols:unregister()

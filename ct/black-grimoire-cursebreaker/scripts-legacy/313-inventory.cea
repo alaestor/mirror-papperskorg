@@ -1,0 +1,106 @@
+{$lua}
+if syntaxcheck then return end
+
+[ENABLE]
+alce.cfg.debug_print = false -- takes for_ever unless you limit the loop...
+local loopLimiter = nil -- breaks early if not nil (prevents loading all items)
+
+---- Globals
+PlayerInventory = mc.UI_Inventory:instanceFrom(mc.UI_Inventory.static.instance)
+PlayerInventorySelectedSlot = PlayerInventory.__baseAddress + mc.UI_Inventory.offset.usingItemSlot
+GameItemHandler = mc['ItemHandler']:instanceFrom(mc['ItemHandler'].static.instance)
+GameItemNames = {}
+GameItemName2ID = {}
+GameItemID2Name = {}
+GameItemDropdownString = ''
+----
+
+-- filter out items by using these lists, or adding logic to `shouldIgnore` (dont forget to uncomment in the `allItems` loop)
+--[[
+local badIDs = { 0 }
+local badNames = {}
+local badTypes = {}
+local badCategories = {}
+local function shouldIgnore(name, id, categories, itemType)
+  for _,bad in ipairs(badIDs) do if id == bad then return true end end
+  for _,bad in ipairs(badNames) do if name == bad then return true end end
+  for _,bad in ipairs(badTypes) do if itemType == bad then return true end end
+  for _,bad in ipairs(badCategories) do for cat in ipairs(categories) do if cat == bad then return true end end end
+  return false
+end
+--]]
+
+local lookupCategory = mc['ItemHandler+ItemCategory'].constToKey
+local lookupType = mc['ItemHandler+ItemType'].constToKey
+
+local function getItemCategories(categoryListPtr)
+  local itemCategoriesList = alce.mono_t.List:new({ baseAddress = categoryListPtr })
+  local categories = {}
+  for index = 0, itemCategoriesList:size() - 1 do
+    local catid = itemCategoriesList:atUnsafe(index)
+    if catid ~= 0 then table.insert(categories, lookupCategory[catid]) end
+  end
+  table.sort(categories)
+  return next(categories) and categories or nil
+end
+
+local allItems = alce.mono_t.List:new({ baseAddress = GameItemHandler.items })
+for index = 0, allItems:size() - 1 do
+  local i = index + 1
+  if loopLimiter and i >= loopLimiter then break end
+  local item = mc['ItemHandler+Item']:instance({
+    baseAddress = allItems:atUnsafe(index),
+  })
+  local name = item:GetItemName()
+  local id = item.typeId
+  local categories = getItemCategories(item.itemCategory)
+  local itemType = lookupType[item.itemType]
+  -- filter
+--  if shouldIgnore(name, id, categories, itemType) then goto continue end
+  -- construct display string
+  local displayName = itemType and itemType .. ' - ' or ''
+  local categoryString = categories and table.concat(categories, "/") or nil
+  if categoryString then displayName = displayName .. categoryString .. ' - ' end
+  displayName = displayName .. name
+  -- add to tables
+  table.insert(GameItemNames, displayName)
+  GameItemName2ID[displayName] = id
+  GameItemID2Name[id] = displayName
+  ::continue::
+end
+
+table.sort(GameItemNames)
+--alce.inspect('GameItemNames',GameItemNames)
+
+GameItemDropdownString = table.concat(
+  (function()
+    local entries = {}
+    for _, name in ipairs(GameItemNames) do entries[#entries + 1] = GameItemName2ID[name] .. ':' .. name end
+    return entries
+  end)(),
+  '\n'
+)
+
+AddressList.rebuildDescriptionCache()
+-- apply item dropdown list string to relevant MRs
+for _,name in ipairs({
+  'Selected Item',
+}) do
+  local mr = AddressList.getMemoryRecordByDescription(name)
+  if mr then
+    mr.DropDownList.Text = GameItemDropdownString
+    mr.DisplayAsDropDownListItem = true
+    mr.DropDownDescriptionOnly = true -- unpadded numbers make things hard to read when sorted alphabetically
+  else
+    alce.warn('failed to get MR: ' .. name)
+  end
+end
+
+[DISABLE]
+PlayerInventory = nil
+PlayerInventorySelectedSlot = nil
+GameItemHandler = nil
+GameItemNames = nil
+GameItemName2ID = nil
+GameItemID2Name = nil
+GameItemDropdownString = nil

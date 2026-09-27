@@ -1,0 +1,51 @@
+{$lua}
+if syntaxcheck then return end
+[ENABLE]
+--alce.cfg.debug_print = false
+alce.mono.init()
+mc_full = alce.mono.ClassTable.new({})
+
+mc_full:addFromImage({
+  image = 'Assembly-CSharp',
+  targets = {
+    'Kingmaker.Game',
+    'Kingmaker.Player',
+    'Kingmaker.UnitLogic.UnitStealth',
+    'Kingmaker.UnitLogic.Encumbrance',
+    'Kingmaker.UnitLogic.UnitDescriptor',
+    'Kingmaker.EntitySystem.PersistentState',
+    'Kingmaker.EntitySystem.Entities.UnitReference',
+    'Kingmaker.EntitySystem.Entities.UnitEntityData',
+    'Kingmaker.EntitySystem.Stats.StatType',
+    'Kingmaker.EntitySystem.Stats.StatTypeHelper',
+    'Kingmaker.EntitySystem.Stats.CharacterStats',
+    'Kingmaker.EntitySystem.Stats.SavingThrowType',
+    'Kingmaker.EntitySystem.Stats.ModifiableValue',
+    --'Kingmaker.EntitySystem.Stats.ModifiableValueSkill',
+    --'Kingmaker.EntitySystem.Stats.ModifiableValueSpeed',
+    --'Kingmaker.EntitySystem.Stats.ModifiableValueHitPoints',
+    --'Kingmaker.EntitySystem.Stats.ModifiableValueArmorClass',
+    --'Kingmaker.EntitySystem.Stats.ModifiableValueSavingThrow',
+    --'Kingmaker.EntitySystem.Stats.ModifiableValueAttributeStat',
+    --'Kingmaker.EntitySystem.Stats.ModifiableValueTemporaryHitPoints',
+  },
+})
+mc_full:load()
+
+-- map leaf for convenience where unique
+mc = {}
+for k,v in pairs(mc_full) do
+  local newkey = (string.match(k, "([^%.]+)$") or k)
+  if mc[newkey] then
+    mc[newkey] = "tombstone"
+  else
+    mc[newkey] = v
+  end
+end
+for k,v in pairs(mc) do
+  if k == "tombstone" then mc[k] = nil end
+end
+
+[DISABLE]
+mc = nil;
+mc_full:clear()

@@ -1,0 +1,9 @@
+{$lua}
+if mc then
+    alce.inspect('Mono Class Table', mc)
+else
+    print("Error: The global table 'mc' has not been initialized.")
+end
+[ENABLE]
+[DISABLE]
+

@@ -1,0 +1,34 @@
+{$lua}
+if syntaxcheck then return end
+[ENABLE]
+-- prep
+assert(GetPlayerPosition, 'GetPlayerPosition() not found')
+local topmr = AddressList.getMemoryRecordByDescription('-------/ Custom Teleports \\-------')
+assert(topmr)
+-- process user input & prevent duplication
+local pos = GetPlayerPosition()
+assert(pos and pos.x and pos.y and pos.z, 'Got invalid position')
+local str = string.format('x=%f, y=%f, z=%f', pos.x, pos.y, pos.z)
+local name = inputQuery('Custom Teleport ', 'Name:', str)
+assert(alce.validators.isNonBlankString(name), "Name probably shouldn't be blank?")
+
+alce.cheat_table.createRecord({
+  parent = topmr,
+  description = name,
+  vtype = vtAutoAssembler,
+  saveToTable = true,
+}).Script = string.format([[
+{$lua}
+if syntaxcheck then return end
+-- Original name: %s
+[%s]
+assert(TeleportPlayer, 'TeleportPlayer() not found')
+TeleportPlayer({%s})
+alce.cheat_table.disableAfterSuccess({})
+[%s]
+]],
+name, 'ENABLE', str, 'DISABLE')
+-- avoids multiple [ENABLE]  error in 7.6
+
+alce.cheat_table.disableAfterSuccess({})
+[DISABLE]

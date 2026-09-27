@@ -1,0 +1,52 @@
+{$lua}
+if syntaxcheck then return end
+
+[ENABLE]
+
+local game_ptr = readPointer(mc.Game.static.s_Instance)
+local estate_ptr = readPointer(game_ptr + mc.Game.offset.State)
+local player_ptr = readPointer(estate_ptr + mc.PersistentState.offset.PlayerState)
+player = {}
+
+--[[
+p.player = mc.Player:instance({baseAddress = player_ptr})
+local unit_ptr = readPointer(p.player.m_MainCharacter + mc.UnitReference.offset.m_Unit)
+p.unit = mc.UnitEntityData:instance({baseAddress = unit_ptr})
+p.descriptor = mc.UnitDescriptor:instanceFrom(unit_ptr, mc.UnitEntityData.offset["Descriptor>k__BackingField"])
+p.stats = mc.CharacterStats:instanceFrom(p.descriptor.Stats)
+--]]
+
+player.stats_ptr = alce.utils.safeChain(
+  player_ptr,
+  mc.UnitReference.offset.m_Unit,
+  mc.UnitEntityData.offset["<Descriptor>k__BackingField"],
+  mc.UnitDescriptor.offset.Stats
+)
+
+player.stats = mc.CharacterStats:instance({baseAddress = player.stats_ptr})
+
+for k,v in pairs(mc.StatType.const) do
+  local h = alce.cheat_table.createHeader({
+    parent = alce.THIS,
+    description = k
+  })
+  --[[
+  local addr = player.stats:GetStat(v)
+  local r = {
+    { desc="Base", vt=vtDword, off=mc.ModifiableValue.offset.m_BaseValue },
+    { desc="Permanent", vt=vtDword, off=mc.ModifiableValue.offset.PermanentValue },
+  }
+  for i,a in ipairs(r) do
+    alce.cheat_table.createRecord({
+      parent = h,
+      description = a.desc,
+      vtype = a.vt,
+      address = addr,
+      offsets = { r.off }
+    })
+  end
+  --]]
+end
+
+[DISABLE]
+player = nil

@@ -1,0 +1,6 @@
+[ENABLE]
+[[mc.CBCameraController.static.instance]+mc.CBCameraController.offset.postprocessing]+mc.PostProcessingChanger.offset.active:
+  db 1
+[DISABLE]
+[[mc.CBCameraController.static.instance]+mc.CBCameraController.offset.postprocessing]+mc.PostProcessingChanger.offset.active:
+  db 0

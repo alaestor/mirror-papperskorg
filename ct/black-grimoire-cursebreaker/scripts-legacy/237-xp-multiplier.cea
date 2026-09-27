@@ -1,0 +1,77 @@
+{ Game   : Cursebreaker.exe
+  Version: build 20372594 (from roughly 2025-10)
+
+  XP multiplier
+}
+{$STRICT}
+
+define(address,PlayerLevels:AddXp+253)
+define(bytes,F3 41 0F 10 46 14 F3 0F 5A C0 F3 0F 10 4D D8 F3 0F 5A C9 F2 0F 58 C1 F2 0F 5A E8 F3 41 0F 11 6E 14)
+
+[ENABLE]
+
+assert(address,bytes)
+alloc(newmem,$1000,PlayerLevels:AddXp+253)
+
+label(code)
+label(return)
+label(cfg_Tdouble_multiplier_xp)
+registersymbol(cfg_Tdouble_multiplier_xp)
+
+newmem:
+
+code:
+  movss xmm0,[r14+14] // current xp (T: UnitSkills+Skill)
+  cvtss2sd xmm0,xmm0
+  movss xmm1,[rbp-28] // exp being gained (unknown?)
+  cvtss2sd xmm1,xmm1
+  //--< added multiplier behavior
+  movsd xmm15,[cfg_Tdouble_multiplier_xp]
+  mulpd xmm1,xmm15
+  xorps xmm15,xmm15
+  //-->
+  addsd xmm0,xmm1     // current + new
+  cvtsd2ss xmm5,xmm0
+  movss [r14+14],xmm5 // write new
+  jmp return
+cfg_Tdouble_multiplier_xp:
+  dq (double)2
+address:
+  jmp code
+  nop 1C
+return:
+
+[DISABLE]
+address:
+  db bytes
+
+dealloc(newmem)
+unregistersymbol(cfg_Tdouble_multiplier_xp)
+
+{
+// ORIGINAL CODE - INJECTION POINT: PlayerLevels:AddXp+253
+
+PlayerLevels:AddXp+22a: 0F 84 23 00 00 00        - je PlayerLevels:AddXp+253
+PlayerLevels:AddXp+230: 48 8B 47 30              - mov rax,[rdi+30]
+PlayerLevels:AddXp+234: F3 0F 10 45 D8           - movss xmm0,[rbp-28]
+PlayerLevels:AddXp+239: F3 0F 5A C0              - cvtss2sd xmm0,xmm0
+PlayerLevels:AddXp+23d: F2 44 0F 2C C0           - cvttsd2si r8d,xmm0
+PlayerLevels:AddXp+242: 48 8B C8                 - mov rcx,rax
+PlayerLevels:AddXp+245: 48 8B D6                 - mov rdx,rsi
+PlayerLevels:AddXp+248: 48 89 45 C0              - mov [rbp-40],rax
+PlayerLevels:AddXp+24c: FF 50 18                 - call qword ptr [rax+18]
+PlayerLevels:AddXp+24f: 48 8B 45 C0              - mov rax,[rbp-40]
+// ---------- INJECTING HERE ----------
+PlayerLevels:AddXp+253: F3 41 0F 10 46 14        - movss xmm0,[r14+14]
+PlayerLevels:AddXp+259: F3 0F 5A C0              - cvtss2sd xmm0,xmm0
+PlayerLevels:AddXp+25d: F3 0F 10 4D D8           - movss xmm1,[rbp-28]
+PlayerLevels:AddXp+262: F3 0F 5A C9              - cvtss2sd xmm1,xmm1
+PlayerLevels:AddXp+266: F2 0F 58 C1              - addsd xmm0,xmm1
+PlayerLevels:AddXp+26a: F2 0F 5A E8              - cvtsd2ss xmm5,xmm0
+PlayerLevels:AddXp+26e: F3 41 0F 11 6E 14        - movss [r14+14],xmm5
+// ---------- DONE INJECTING  ----------
+PlayerLevels:AddXp+274: 48 8B 04 25 D0 66 2C 6B  - mov rax,[6B2C66D0]
+PlayerLevels:AddXp+27c: F3 0F 10 45 D8           - movss xmm0,[rbp-28]
+PlayerLevels:AddXp+281: F3 0F 5A C0              - cvtss2sd xmm0,xmm0
+PlayerLevels:AddXp+285: 48 8B C8                 - mov rcx,rax
+}
