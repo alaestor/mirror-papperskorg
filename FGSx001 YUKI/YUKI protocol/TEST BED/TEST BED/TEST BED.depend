@@ -1,0 +1,61 @@
+# depslib dependency file v1.0
+1397594498 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki protocol\test bed\test bed\main.c
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+	<winsock2.h>
+	"..\..\YUKI\yuki.h"
+
+1397593223 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki protocol\yuki\yuki.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<stdint.h>
+
+1401683115 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\test bed\test bed\main.c
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+	<winsock2.h>
+	"..\..\YUKI\yuki.h"
+	"..\..\YUKI\memman.h"
+	"..\..\YUKI\yukistate.h"
+
+1401682712 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\yuki.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<stdint.h>
+
+1401517966 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\memman.h
+
+1401682712 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\yukistate.h
+	"yuki.h"
+
+1407214214 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\test bed\test bed\main.c
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+	<winsock2.h>
+	"..\..\YUKI mod dolan\yuki.h"
+	"..\..\YUKI mod dolan\memman.h"
+	"..\..\YUKI mod dolan\yukistate.h"
+
+1407207904 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki mod dolan\yuki.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<stdint.h>
+	<stdio.h>
+	"yukitypes.h"
+
+1407207910 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki mod dolan\yukitypes.h
+
+1407207898 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki mod dolan\memman.h
+	<stdint.h>
+	<windows.h>
+	<stdio.h>
+	"yukitypes.h"
+
+1407207908 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki mod dolan\yukistate.h
+	<stdint.h>
+	"yukitypes.h"
+	"yuki.h"
+

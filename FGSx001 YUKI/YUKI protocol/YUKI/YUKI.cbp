@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="YUKI" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="YUKI" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-Wall" />
+					<Add option="-std=c99" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="C:\Program Files (x86)\CodeBlocks\MinGW\lib\libws2_32.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-fomit-frame-pointer" />
+			<Add option="-fexpensive-optimizations" />
+			<Add option="-O3" />
+			<Add option="-std=c11" />
+		</Compiler>
+		<Linker>
+			<Add option="-s" />
+		</Linker>
+		<Unit filename="fglmaths.h" />
+		<Unit filename="handlers.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="handlers.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="memman.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="memman.h" />
+		<Unit filename="yuki.h" />
+		<Unit filename="yukistate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="yukistate.h" />
+		<Unit filename="yukitypes.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

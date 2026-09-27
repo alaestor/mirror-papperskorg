@@ -1,0 +1,181 @@
+# depslib dependency file v1.0
+1396191181 source:c:\users\josh land\desktop\project\aaa programming\yuki - nagato\yuki protocol\yuki\main.c
+
+1396191209 source:c:\users\josh land\desktop\project\aaa programming\yuki - nagato\yuki protocol\yuki\ehandle.c
+	<stdio.h>
+	<windows.h>
+	"eHandle.h"
+
+1396191181 c:\users\josh land\desktop\project\aaa programming\yuki - nagato\yuki protocol\yuki\ehandle.h
+	<windows.h>
+	<stdint.h>
+
+1396191209 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\teamspeak3-server_win64\files\virtualserver_1\channel_52\yuki protocol\yuki\ehandle.c
+	<stdio.h>
+	<windows.h>
+	"eHandle.h"
+
+1396191181 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\teamspeak3-server_win64\files\virtualserver_1\channel_52\yuki protocol\yuki\ehandle.h
+	<windows.h>
+	<stdint.h>
+
+1396838011 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\teamspeak3-server_win64\files\virtualserver_1\channel_52\yuki protocol\yuki\main.c
+	<stdint.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"yuki.h"
+
+1396611497 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\teamspeak3-server_win64\files\virtualserver_1\channel_52\yuki protocol\yuki\sockhandler.h
+	"eHandle.h"
+
+1396191209 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\teamspeak3-server_win64\files\virtualserver_1\channel_52\yuki protocol\yuki\ehandle.c
+	<stdio.h>
+	<windows.h>
+	"eHandle.h"
+
+1396613052 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\teamspeak3-server_win64\files\virtualserver_1\channel_52\yuki protocol\yuki\sockhandler.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<winsock2.h>
+
+1396838073 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\teamspeak3-server_win64\files\virtualserver_1\channel_52\yuki protocol\yuki\yuki.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<stdint.h>
+
+1396191209 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki protocol\yuki\ehandle.c
+	<stdio.h>
+	<windows.h>
+	"eHandle.h"
+
+1396191181 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki protocol\yuki\ehandle.h
+	<windows.h>
+	<stdint.h>
+
+1396613052 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki protocol\yuki\sockhandler.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<winsock2.h>
+
+1397878345 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki protocol\yuki\main.c
+	<stdint.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"yuki.h"
+	"handlers.h"
+
+1397954782 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki protocol\yuki\yuki.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<stdint.h>
+
+1397878345 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki protocol\yuki\handlers.c
+	<stdio.h>
+	"yuki.h"
+	"handlers.h"
+
+1397872920 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki protocol\yuki\handlers.h
+	"yuki.h"
+
+1396191209 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\ehandle.c
+	<stdio.h>
+	<windows.h>
+	"eHandle.h"
+
+1396191181 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\ehandle.h
+	<windows.h>
+	<stdint.h>
+
+1397878345 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\handlers.c
+	<stdio.h>
+	"yuki.h"
+	"handlers.h"
+
+1401682712 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\yuki.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<stdint.h>
+
+1397872920 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\handlers.h
+	"yuki.h"
+
+1396613052 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\sockhandler.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<winsock2.h>
+
+1398914357 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\main.c
+	<stdint.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"yuki.h"
+	"handlers.h"
+
+1401474899 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\memman.c
+	<stdint.h>
+	<windows.h>
+	"memman.h"
+
+1401517966 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\yuki nagato\yuki protocol\yuki\memman.h
+
+1406739886 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\handlers.c
+	<stdio.h>
+	"yuki.h"
+	"handlers.h"
+
+1406739893 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\yuki.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<stdint.h>
+	"yukitypes.h"
+
+1406739956 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\yukitypes.h
+
+1406739887 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\handlers.h
+	"yuki.h"
+
+1406739888 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\main.c
+	<stdint.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<windows.h>
+	"yuki.h"
+	"yukistate.h"
+	"handlers.h"
+	"memman.h"
+
+1406739895 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\yukistate.h
+	<stdint.h>
+	"yukitypes.h"
+	"yuki.h"
+
+1406739890 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\memman.h
+	<stdint.h>
+	<windows.h>
+	<stdio.h>
+	"yukitypes.h"
+
+1406739889 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\memman.c
+	<stdint.h>
+	<windows.h>
+	<stdio.h>
+	"memman.h"
+	"fglmaths.h"
+
+1406739885 c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\fglmaths.h
+
+1406739894 source:c:\users\josh land\desktop\mem\noble unit dayz\ts3s\fgl ts3 server\teamspeak3-server_win64\files\virtualserver_1\channel_3\02 future gadgets\software division\fgsx001 yuki\yuki protocol\yuki\yukistate.c
+	<winsock2.h>
+	<ws2tcpip.h>
+	"yuki.h"
+	"yukistate.h"
+
