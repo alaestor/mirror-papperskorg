@@ -1,0 +1,6 @@
+.*
+__*
+alce.lua
+result
+result-*
+!.gitignore

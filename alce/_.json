@@ -1,0 +1,48 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+
+  "runtime": {
+    "version": "Lua 5.3",
+    "path": ["src/?.lua", "annotations/?.lua", "tests/?.lua", "builder/?.lua", "lua-embed-file/?.lua"],
+    "pathStrict": true,
+    "unicodeName": false
+  },
+
+  "workspace": {
+    "ignoreDir": [".git", "__reference"],
+    "library": [
+      "${env:FNLUA_ANNOTATIONS_PATH}",
+      "${env:CE_ANNOTATIONS_PATH}",
+      "${workspaceFolder}/builder/table_builder.d.lua",
+      "${workspaceFolder}/lua-embed-file/lua_embed_file.d.lua"
+    ]
+  },
+
+  "diagnostics": {
+    "libraryFiles": "Disable",
+    "ignoredFiles": "Disable",
+    "disable": [],
+    "groupRegion": true,
+    "groupSeverity": {
+      "ambiguity": "Warning",
+      "await": "Warning",
+      "codestyle": "Warning",
+      "conventions": "Warning",
+      "global": "Warning",
+      "strict": "Warning",
+      "unused": "Warning",
+      "duplicate": "Warning",
+      "luadoc": "Warning",
+      "redefined": "Warning",
+      "strong": "Warning",
+      "type-check": "Warning",
+      "unbalanced": "Warning"
+    }
+  },
+
+  "type": {
+    "checkTableShape": true,
+    "weakNilCheck": false,
+    "weakUnionCheck": false
+  }
+}
